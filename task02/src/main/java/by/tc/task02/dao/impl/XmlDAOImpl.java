@@ -19,13 +19,11 @@ import by.tc.task02.dao.parser.CreatorXML;
 
 public class XmlDAOImpl implements XmlDAO {
 	
-	// private static final String DEFAULT_FILE_NAME = "task02.xml";
-	private static final String DEFAULT_FILE_NAME = "example3.xml";
+	private static final String DEFAULT_FILE_NAME = "task02.xml";
 	
 	public Node getData(String inputFile) throws DaoException {
 		
 		String rawData = null;
-		
 		try {
 			rawData = readFile(inputFile);
 		}
@@ -48,29 +46,33 @@ public class XmlDAOImpl implements XmlDAO {
 	}
 
 	public Node getData() throws DaoException {
-		System.out.println(getDefaultPath(DEFAULT_FILE_NAME));
 		return getData(getDefaultPath(DEFAULT_FILE_NAME));
 	}
+	
 	
 	private String getDefaultPath(String fileName) {
 		ClassLoader classLoader = getClass().getClassLoader();
 		return classLoader.getResource(fileName).getFile();
 	}
 	
+	
 	private String readFile(String inputFile) throws IOException {
+		final String START_FILE = "file:";
+		final String START_JAR = "jar:";
+		final String DELIMITER = "!";
+		final String START_SLASH = "/";
 		
 		Path path = null;
-		if (inputFile.startsWith("file:")) {
-			inputFile = "jar:" + inputFile;
-			String[] array = inputFile.split("!");
+		if (inputFile.startsWith(START_FILE)) {
+			inputFile = START_JAR + inputFile;
+			String[] array = inputFile.split(DELIMITER);
 			FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), new HashMap<String, Object>());
 			path = fs.getPath(array[1]);
 		}
 		else {
-			if (inputFile.startsWith("/")) { inputFile = inputFile.substring(1); }
+			if (inputFile.startsWith(START_SLASH)) { inputFile = inputFile.substring(1); }
 			path = Paths.get(inputFile);
 		}
-		
 		String contents = new String(Files.readAllBytes(path));
 		
 		return contents;

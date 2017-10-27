@@ -35,6 +35,8 @@ public class PrintXMLInfo {
 				System.out.println("\n");
 			}
 			for (Node childElement : el.getChildElements()){
+//				System.out.print("\n");
+
 				recursivePrint(childElement, "  ");
 			}
 		}
