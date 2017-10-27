@@ -26,6 +26,7 @@ public class PrintXMLInfo {
 			return;
 		}
 		else if (elem instanceof ComplexXmlElement){
+			System.out.println("\n");
 			ComplexXmlElement el = (ComplexXmlElement)elem;
 			if ((el != null) && (el.getAttributes() != null) && (!el.getAttributes().isEmpty())){
 				System.out.println("\n");
@@ -35,7 +36,6 @@ public class PrintXMLInfo {
 				System.out.println("\n");
 			}
 			for (Node childElement : el.getChildElements()){
-//				System.out.print("\n");
 
 				recursivePrint(childElement, "  ");
 			}
