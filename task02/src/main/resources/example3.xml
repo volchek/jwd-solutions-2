@@ -1,0 +1,12 @@
+<breakfast-menu>
+    <food id="1">
+        <name country="BE" time="30 min">Belgian Waffles</name>
+        <price money="US">$5.95</price>
+    </food>
+
+    <food id="2">
+        <name country="BE" time="55 min">Strawberry Belgian Waffles</name>
+        <price money="US">$7.95</price>
+    </food>
+
+</breakfast-menu>
